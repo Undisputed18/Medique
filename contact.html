@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - MEDI CURE</title>
+  <style>
+    :root {
+      --primary-color: #1a73e8;
+      --primary-dark: #0d47a1;
+      --secondary-color: #34a853;
+      --secondary-dark: #2e7d32;
+      --danger-color: #ea4335;
+      --warning-color: #fbbc05;
+      --light-bg: #f8f9fa;
+      --dark-text: #202124;
+      --light-text: #5f6368;
+      --border-color: #dadce0;
+      --white: #ffffff;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.07);
+      --shadow-large: 0 10px 25px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Dark mode variables */
+    .dark-mode {
+      --light-bg: #121212;
+      --dark-text: #e8eaed;
+      --light-text: #9aa0a6;
+      --border-color: #3c4043;
+      --white: #1e1e1e;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.4);
+      --shadow-large: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: var(--transition);
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      color: #0d47a1;
+      padding: clamp(20px, 5vw, 40px) 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode header {
+      background: linear-gradient(135deg, #0d47a1 0%, #4a148c 100%);
+      color: #e8eaed;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      animation: shimmer 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(10px, 3vw, 20px);
+      width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      color: var(--light-text);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: var(--white);
+      padding: 0 clamp(10px, 3vw, 20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(10px, 2vw, 30px);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-logo {
+      color: var(--primary-color);
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      color: var(--dark-text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: var(--transition);
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      white-space: nowrap;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-links a:hover::before {
+      left: 100%;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+      background-color: rgba(26, 115, 232, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .nav-links a.active {
+      color: var(--primary-color);
+      background-color: rgba(26, 115, 232, 0.1);
+      position: relative;
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-color);
+      border-radius: 3px;
+      animation: pulse 2s infinite;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--dark-text);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 8px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: var(--primary-color);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .theme-toggle:hover::before {
+      width: 100%;
+      height: 100%;
+      opacity: 0.1;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    .theme-toggle .fa-sun {
+      display: none;
+    }
+
+    .dark-mode .theme-toggle .fa-moon {
+      display: none;
+    }
+
+    .dark-mode .theme-toggle .fa-sun {
+      display: block;
+      color: var(--warning-color);
+    }
+
+    /* Main Content */
+    main {
+      padding: clamp(30px, 5vw, 60px) 0;
+      background-color: var(--light-bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(20px, 4vw, 40px);
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--white);
+      padding: clamp(20px, 4vw, 40px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-medium);
+      width: 100%;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-large);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 3vw, 30px);
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 15px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      background-color: var(--light-bg);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 30%, rgba(26, 115, 232, 0.05) 50%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .info-item:hover::after {
+      opacity: 1;
+    }
+
+    .info-item:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 2px 8px rgba(26, 115, 232, 0.1);
+      transform: translateX(5px);
+    }
+
+    .info-icon {
+      width: clamp(40px, 8vw, 50px);
+      height: clamp(40px, 8vw, 50px);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: clamp(1rem, 3vw, 1.2rem);
+      flex-shrink: 0;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .info-item:hover .info-icon::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    .info-item:hover .info-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .info-content h3 {
+      margin-bottom: 5px;
+      color: var(--dark-text);
+      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-weight: 600;
+    }
+
+    .info-content p {
+      color: var(--light-text);
+      margin-bottom: 5px;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .social-link {
+      width: clamp(35px, 7vw, 40px);
+      height: clamp(35px, 7vw, 40px);
+      background: var(--white);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 2px solid var(--border-color);
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: var(--primary-color);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .social-link:hover::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    .social-link:hover {
+      color: white;
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 4px 8px rgba(26, 115, 232, 0.2);
+      border-color: var(--primary-color);
+    }
+
+    .social-link i {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: clamp(15px, 3vw, 20px);
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--dark-text);
+      font-weight: 600;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+      transition: var(--transition);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: clamp(10px, 2.5vw, 12px) clamp(12px, 2.5vw, 16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      font-size: clamp(14px, 3vw, 15px);
+      transition: var(--transition);
+      background: var(--white);
+      color: var(--dark-text);
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: clamp(100px, 25vw, 120px);
+    }
+
+    /* Floating label effect */
+    .floating-label {
+      position: relative;
+    }
+
+    .floating-label label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: var(--light-text);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .floating-label input:focus + label,
+    .floating-label input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 8px;
+      font-size: 12px;
+      color: var(--primary-color);
+      background: var(--white);
+      padding: 0 4px;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: clamp(12px, 3vw, 14px) clamp(20px, 4vw, 30px);
+      border-radius: var(--radius);
+      font-size: clamp(14px, 3vw, 16px);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      min-height: 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn-primary:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(26, 115, 232, 0.3);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+      min-height: 36px;
+      transition: var(--transition);
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .copy-btn::before {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.3s ease;
+    }
+
+    .copy-btn.copied::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .copy-btn.copied span {
+      opacity: 0;
+    }
+
+    .copy-btn:hover {
+      background: var(--secondary-dark);
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: 0 4px 8px rgba(52, 168, 83, 0.2);
+    }
+
+    /* Alternative Contact Options */
+    .contact-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 480px) {
+      .contact-options {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-option {
+      background: var(--light-bg);
+      padding: clamp(15px, 3vw, 20px);
+      border-radius: var(--radius);
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(26, 115, 232, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .contact-option:hover::before {
+      left: 100%;
+    }
+
+    .contact-option:hover {
+      border-color: var(--primary-color);
+      background: var(--white);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-option h4 {
+      color: var(--dark-text);
+      margin-bottom: 8px;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-weight: 600;
+    }
+
+    .contact-option p {
+      color: var(--light-text);
+      font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+    }
+
+    /* Alert Messages */
+    .alert {
+      padding: clamp(12px, 3vw, 15px) clamp(15px, 3vw, 20px);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      text-align: center;
+      animation: slideDown 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+      font-weight: 500;
+      border-left: 4px solid;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .alert::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    .alert-success {
+      background: rgba(52, 168, 83, 0.1);
+      color: var(--secondary-dark);
+      border-color: var(--secondary-color);
+    }
+
+    .alert-error {
+      background: rgba(234, 67, 53, 0.1);
+      color: #c62828;
+      border-color: var(--danger-color);
+    }
+
+    .alert-info {
+      background: rgba(26, 115, 232, 0.1);
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    .alert-warning {
+      background: rgba(251, 188, 5, 0.1);
+      color: #f57c00;
+      border-color: var(--warning-color);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--white);
+      color: var(--light-text);
+      text-align: center;
+      padding: clamp(20px, 4vw, 30px) 0;
+      margin-top: auto;
+      border-top: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    footer p {
+      margin-bottom: 8px;
+      font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 767px) {
+      .nav-container {
+        flex-direction: column;
+        padding: 12px 0;
+        gap: 12px;
+      }
+
+      .nav-links {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .info-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .info-icon {
+        align-self: center;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+        border-radius: var(--radius);
+      }
+
+      .contact-options {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-option {
+        padding: 15px;
+      }
+
+      input, textarea, select {
+        padding: 12px 15px;
+      }
+
+      .btn-primary {
+        padding: 12px 20px;
+      }
+    }
+
+    /* Very small devices */
+    @media (max-width: 360px) {
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+    }
+
+    /* Touch-friendly improvements */
+    button, .nav-links a, .contact-option, .social-link {
+      min-height: 44px;
+      min-width: 44px;
+    }
+
+    input, select, textarea {
+      font-size: 16px;
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* Ensure full height layout */
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--light-bg);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Additional styles */
+    h2 {
+      color: var(--dark-text);
+      font-size: clamp(1.5rem, 4vw, 1.8rem);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      border-radius: 2px;
+      animation: widthGrow 1s ease;
+    }
+
+    @keyframes widthGrow {
+      from { width: 0; }
+      to { width: 60px; }
+    }
+
+    .card h2.center::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <h1>Contact Us</h1>
+      <p class="lead">Get in touch with our team. We're here to help you with any questions about MEDI CURE clinical booking system.</p>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-stethoscope"></i>
+        <strong>MEDI CURE</strong>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="contact.html" class="active">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="wrap">
+    <div class="contact-grid">
+      <!-- Contact Information -->
+      <div class="card contact-info">
+        <h2>Get In Touch</h2>
+        
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <h3>Visit Us</h3>
+            <p>456 Healthcare Blvd, Suite 789</p>
+            <p>Medical City, MC 10101</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div class="info-content">
+            <h3>Call Us</h3>
+            <p>+1 (555) 789-0123</p>
+            <p>Mon - Fri, 8:00 AM - 6:00 PM EST</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div class="info-content">
+            <h3>Email Us</h3>
+            <p id="email-display">support@medicure.com</p>
+            <p>We respond within 24 hours</p>
+            <button class="copy-btn" onclick="copyEmail(this)">
+              <span>📋 Copy Email</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Alternative Contact Options -->
+        <div style="margin-top: 30px;">
+          <h3 style="margin-bottom: 15px;">Alternative Contact Methods</h3>
+          <div class="contact-options">
+            <div class="contact-option" onclick="openGmail()">
+              <h4>📧 Gmail</h4>
+              <p>Open in Gmail (web)</p>
+            </div>
+            <div class="contact-option" onclick="openOutlook()">
+              <h4>📧 Outlook</h4>
+              <p>Open in Outlook (web)</p>
+            </div>
+            <div class="contact-option" onclick="copyEmailTemplate()">
+              <h4>📋 Copy Template</h4>
+              <p>Copy email template</p>
+            </div>
+            <div class="contact-option" onclick="showManualEmailInstructions()">
+              <h4>ℹ️ Manual Email</h4>
+              <p>Email instructions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="card">
+        <h2>Send us a Message</h2>
+        <div id="formAlerts"></div>
+        
+        <div class="alert alert-info">
+          <strong>Note:</strong> This will try to open your email client. If it doesn't work, use the alternative methods on the left.
+        </div>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email *</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Technical Support">Technical Support</option>
+              <option value="Appointment Booking">Appointment Booking</option>
+              <option value="Doctor Information">Doctor Information</option>
+              <option value="Patient Support">Patient Support</option>
+              <option value="Billing Questions">Billing Questions</option>
+              <option value="Feedback">Feedback</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" id="submitBtn">
+            <span id="submitText">Send Message via Email</span>
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <p style="color: var(--light-text); font-size: 14px;">
+            If email doesn't open automatically, please use one of the alternative methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2024 MEDI CURE Clinical Appointment System. All rights reserved.</p>
+      <p style="margin-top: 10px; opacity: 0.8;">Your trusted partner for healthcare appointment booking</p>
+    </div>
+  </footer>
+
+  <script>
+    // Add Font Awesome for icons
+    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">');
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', toggleTheme);
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      
+      // Save preference to localStorage
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('medicure_theme', 'dark');
+      } else {
+        localStorage.setItem('medicure_theme', 'light');
+      }
+    }
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('medicure_theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Contact Form Handling
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const userEmail = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value.trim();
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitText');
+
+      // Basic validation
+      if (!validateForm(name, userEmail, subject, message)) {
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitText.innerHTML = '<div class="loading"></div>';
+
+      // Try multiple email methods
+      attemptEmailSend(name, userEmail, subject, message);
+    });
+
+    function validateForm(name, email, subject, message) {
+      if (!name || !email || !subject || !message) {
+        showAlert('Please fill in all required fields.', 'error');
+        return false;
+      }
+
+      if (!isValidEmail(email)) {
+        showAlert('Please enter a valid email address.', 'error');
+        return false;
+      }
+
+      if (message.length < 10) {
+        showAlert('Please provide a more detailed message (at least 10 characters).', 'error');
+        return false;
+      }
+
+      return true;
+    }
+
+    function attemptEmailSend(name, userEmail, subject, message) {
+      const emailBody = createEmailBody(name, userEmail, subject, message);
+      
+      showAlert('Attempting to open email client...', 'info');
+      
+      const mailtoLink = `mailto:support@medicure.com?subject=${encodeURIComponent('MEDI CURE: ' + subject)}&body=${encodeURIComponent(emailBody)}`;
+      
+      // Open mailto link
+      window.location.href = mailtoLink;
+      
+      // Check if mailto worked (basic detection)
+      setTimeout(() => {
+        showAlert('If email client didn\'t open, please use the alternative methods on the left.', 'warning');
+        
+        // Also copy to clipboard as backup
+        copyToClipboard(emailBody);
+        
+        // Reset form
+        document.getElementById('contactForm').reset();
+        
+        // Reset button state
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        submitBtn.disabled = false;
+        submitText.textContent = 'Send Message via Email';
+      }, 2000);
+    }
+
+    function createEmailBody(name, userEmail, subject, message) {
+      return `
+Name: ${name}
+Email: ${userEmail}
+Subject: ${subject}
+
+Message:
+${message}
+
+---
+Sent from MEDI CURE Contact Form
+      `.trim();
+    }
+
+    // Alternative Contact Methods
+    function openGmail() {
+      const gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=support@medicure.com&su=MEDI%20CURE%20Inquiry';
+      window.open(gmailLink, '_blank');
+      showAlert('Opening Gmail in new tab...', 'info');
+    }
+
+    function openOutlook() {
+      const outlookLink = 'https://outlook.live.com/mail/0/deeplink/compose?to=support@medicure.com&subject=MEDI%20CURE%20Inquiry';
+      window.open(outlookLink, '_blank');
+      showAlert('Opening Outlook in new tab...', 'info');
+    }
+
+    function copyEmail(button) {
+      copyToClipboard('support@medicure.com');
+      button.classList.add('copied');
+      setTimeout(() => {
+        button.classList.remove('copied');
+      }, 2000);
+      showAlert('Email address copied to clipboard!', 'success');
+    }
+
+    function copyEmailTemplate() {
+      const template = `
+To: support@medicure.com
+Subject: MEDI CURE Inquiry
+
+Dear MEDI CURE Team,
+
+I would like to get in touch about:
+
+[Please describe your inquiry here]
+
+Best regards,
+[Your Name]
+      `.trim();
+      
+      copyToClipboard(template);
+      showAlert('Email template copied to clipboard!', 'success');
+    }
+
+    function showManualEmailInstructions() {
+      const instructions = `
+To contact us manually:
+
+1. Open your email client
+2. Create a new email
+3. Send to: support@medicure.com
+4. Subject: MEDI CURE Inquiry
+5. Include your name and message
+
+We'll respond within 24 hours!
+      `.trim();
+      
+      showAlert(instructions, 'info');
+    }
+
+    // Utility Functions
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).catch(() => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      });
+    }
+
+    function showAlert(message, type) {
+      const existingAlert = document.querySelector('.alert:not(.alert-info)');
+      if (existingAlert) {
+        existingAlert.remove();
+      }
+
+      const alert = document.createElement('div');
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+
+      const formAlerts = document.getElementById('formAlerts');
+      formAlerts.insertBefore(alert, formAlerts.firstChild);
+
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        alert.style.animation = 'slideDown 0.3s ease reverse';
+        setTimeout(() => {
+          if (alert.parentNode) {
+            alert.parentNode.removeChild(alert);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      showAlert('💡 Choose your preferred contact method. If email client doesn\'t open, use the alternative options.', 'info');
+      
+      // Add hover effects to all interactive elements
+      const interactiveElements = document.querySelectorAll('.btn-primary, .copy-btn, .contact-option, .social-link, .nav-links a');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          el.style.transform = 'translateY(-2px)';
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

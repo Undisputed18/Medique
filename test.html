@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Supabase Connection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Testing Supabase Connection</h1>
+    <div id="result"></div>
+    
+    <script>
+        // YOUR ACTUAL CREDENTIALS
+        const SUPABASE_URL = 'https://uuykpbtkthrwqneedfvp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1eWtwYnRrdGhyd3FuZWVkZnZwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMzk4NjQsImV4cCI6MjA4NDYxNTg2NH0.p_DByi60qrG-naoAVKg3Ym8z7Hz8u2uORzZPNrcA968'; // Replace with your actual key
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        async function testConnection() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Testing connection...</p>';
+            
+            try {
+                // Test 1: Check if profiles table exists
+                const { data: profiles, error: profilesError } = await supabase
+                    .from('profiles')
+                    .select('count(*)', { count: 'exact', head: true });
+                
+                if (profilesError) {
+                    resultDiv.innerHTML += `<p style="color: red;">Error querying profiles: ${profilesError.message}</p>`;
+                } else {
+                    resultDiv.innerHTML += `<p style="color: green;">✓ Profiles table accessible. Count: ${profiles}</p>`;
+                }
+                
+                // Test 2: Check auth session
+                const { data: session, error: sessionError } = await supabase.auth.getSession();
+                if (sessionError) {
+                    resultDiv.innerHTML += `<p style="color: orange;">Auth session: ${sessionError.message}</p>`;
+                } else {
+                    resultDiv.innerHTML += `<p>Auth session: ${session ? 'Active' : 'No session'}</p>`;
+                }
+                
+                // Test 3: Try to insert a test profile (if not logged in, this should fail gracefully)
+                const testData = {
+                    email: 'test@example.com',
+                    full_name: 'Test User',
+                    role: 'patient'
+                };
+                
+                const { error: insertError } = await supabase
+                    .from('profiles')
+                    .insert([testData])
+                    .select();
+                
+                if (insertError) {
+                    resultDiv.innerHTML += `<p>Insert test (expected to fail without auth): ${insertError.message}</p>`;
+                }
+                
+            } catch (err) {
+                resultDiv.innerHTML += `<p style="color: red;">Exception: ${err.message}</p>`;
+            }
+        }
+        
+        testConnection();
+    </script>
+</body>
+</html>
