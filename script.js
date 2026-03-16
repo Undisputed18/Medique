@@ -1904,6 +1904,92 @@ function rescheduleAppointment(appointment) {
         return `${displayHour}:${minutes} ${ampm}`;
     }
     
+    // Show modal
+    function showModal(modal) {
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+    
+    // Hide modal
+    function hideModal(modal) {
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+    
+    // Show authentication modal
+    function showAuthModal() {
+        showModal(authModal);
+        switchAuthTab('login');
+    }
+    
+    // Switch authentication tab
+    function switchAuthTab(tabName) {
+        const authModalTitle = document.getElementById('authModalTitle');
+        
+        authTabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.getAttribute('data-tab') === tabName) {
+                tab.classList.add('active');
+            }
+        });
+        
+        authForms.forEach(form => {
+            form.classList.remove('active');
+            if (form.id === tabName + 'Form') {
+                form.classList.add('active');
+            }
+        });
+        
+        if (authModalTitle) {
+            authModalTitle.textContent = tabName === 'login' ? 'Login to MediQue' : 'Create an Account';
+        }
+    }
+    
+    // Show notification
+    function showNotification(message, type = 'info') {
+        const container = document.getElementById('notificationContainer');
+        if (!container) return;
+        
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        
+        let icon = 'info-circle';
+        if (type === 'success') icon = 'check-circle';
+        if (type === 'error') icon = 'exclamation-circle';
+        if (type === 'warning') icon = 'exclamation-triangle';
+        
+        notification.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            <span>${message}</span>
+            <button class="notification-close">&times;</button>
+        `;
+        
+        container.appendChild(notification);
+        
+        // Auto remove
+        const timeout = setTimeout(() => {
+            removeNotification(notification);
+        }, 5000);
+        
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            clearTimeout(timeout);
+            removeNotification(notification);
+        });
+    }
+    
+    function removeNotification(notification) {
+        notification.classList.add('fade-out');
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }
+    
     // Show page
     // Update the showPage function
 function showPage(pageName) {
