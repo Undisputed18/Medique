@@ -184,12 +184,15 @@ function switchAppointmentTab(tabId) {
         // Navigation
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = e.target.getAttribute('data-page');
-                showPage(page);
-                // Close mobile menu when a link is clicked
-                if (mainNav && mainNav.classList.contains('active')) {
-                    mainNav.classList.remove('active');
+                const page = link.getAttribute('data-page');
+                if (page) {
+                    e.preventDefault();
+                    showPage(page);
+                    
+                    // Close mobile menu when a link is clicked
+                    if (mainNav && mainNav.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
                 }
             });
         });

@@ -1377,7 +1377,8 @@
             
             .mobile-menu-btn {
                 display: block;
-                z-index: 1001;
+                z-index: 2000;
+                position: relative;
             }
             
             nav {
@@ -1388,21 +1389,24 @@
                 height: 100vh;
                 background: var(--white);
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-                transition: var(--transition);
-                z-index: 1000;
+                transition: right 0.3s ease;
+                z-index: 1500;
                 padding: 80px 20px 20px;
                 display: block !important;
+                visibility: hidden;
             }
             
             nav.active {
                 right: 0;
+                visibility: visible;
             }
             
             nav ul {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 15px;
                 width: 100%;
+                display: flex;
             }
             
             nav ul li {
@@ -1415,6 +1419,7 @@
                 padding: 12px 15px;
                 border-radius: var(--radius);
                 background: var(--light-bg);
+                font-size: 1.1rem;
             }
             
             .nav-link.active::after {
@@ -1523,6 +1528,7 @@
                     <li><a href="#" class="nav-link" data-page="doctors">Doctors</a></li>
                     <li><a href="#" class="nav-link" data-page="booking">Book Appointment</a></li>
                     <li><a href="#" class="nav-link" data-page="dashboard">My Appointments</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
                     <li><a href="#" class="nav-link" data-page="doctor-dashboard" style="display: none;" id="doctorDashboardLink">Doctor Dashboard</a></li>
                     <li id="authNavItem">
                         <!-- Will be populated by JavaScript -->
