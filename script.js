@@ -187,7 +187,8 @@ function switchAppointmentTab(tabId) {
                 e.preventDefault();
                 const page = e.target.getAttribute('data-page');
                 showPage(page);
-                if (window.innerWidth <= 768) {
+                // Close mobile menu when a link is clicked
+                if (mainNav && mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
                 }
             });
@@ -1936,95 +1937,34 @@ function showPage(pageName) {
     
     // Toggle mobile menu
     function toggleMobileMenu() {
-        if (mainNav) mainNav.classList.toggle('active');
+        if (mainNav) {
+            mainNav.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mainNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
     }
     
     // Toggle theme
     function toggleTheme() {
         document.body.classList.toggle('dark-mode');
         const icon = themeToggle.querySelector('.fa-moon');
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        
         if (document.body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark');
             if (icon) icon.style.display = 'none';
-            const sunIcon = themeToggle.querySelector('.fa-sun');
             if (sunIcon) sunIcon.style.display = 'block';
         } else {
             localStorage.setItem('theme', 'light');
             if (icon) icon.style.display = 'block';
-            const sunIcon = themeToggle.querySelector('.fa-sun');
             if (sunIcon) sunIcon.style.display = 'none';
         }
-    }
-    
-    // Show auth modal
-    function showAuthModal() {
-        showModal(authModal);
-    }
-    
-    // Switch auth tab
-    function switchAuthTab(tabName) {
-        authTabs.forEach(tab => {
-            tab.classList.toggle('active', tab.getAttribute('data-tab') === tabName);
-        });
-        
-        authForms.forEach(form => {
-            form.classList.toggle('active', form.id === `${tabName}Form`);
-        });
-        
-        const modalTitle = document.getElementById('authModalTitle');
-        if (modalTitle) {
-            modalTitle.textContent = tabName === 'login' ? 'Login to MediQue' : 'Register for MediQue';
-        }
-    }
-    
-    // Show modal
-    function showModal(modal) {
-        if (modal) {
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-    
-    // Hide modal
-    function hideModal(modal) {
-        if (modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    }
-    
-    // Show notification
-    function showNotification(message, type = 'info') {
-        const notificationContainer = document.getElementById('notificationContainer');
-        if (!notificationContainer) return;
-        
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
-            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-            <span>${message}</span>
-            <button class="notification-close"><i class="fas fa-times"></i></button>
-        `;
-        
-        notificationContainer.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.classList.add('fade-out');
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        }, 5000);
-        
-        notification.querySelector('.notification-close').addEventListener('click', () => {
-            notification.classList.add('fade-out');
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.parentNode.removeChild(notification);
-                }
-            }, 300);
-        });
     }
     
     // ==================== START APPLICATION ====================
@@ -2032,15 +1972,20 @@ function showPage(pageName) {
     // Initialize the app
     initializeApp();
     
-    // Check for saved theme preference
+    // Theme Initialization: Default to dark mode unless 'light' is explicitly saved
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-mode');
+        const icon = themeToggle.querySelector('.fa-moon');
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        if (icon) icon.style.display = 'block';
+        if (sunIcon) sunIcon.style.display = 'none';
+    } else {
+        // Default or explicitly 'dark'
         document.body.classList.add('dark-mode');
         const icon = themeToggle.querySelector('.fa-moon');
-        if (icon) {
-            icon.style.display = 'none';
-            const sunIcon = themeToggle.querySelector('.fa-sun');
-            if (sunIcon) sunIcon.style.display = 'block';
-        }
+        const sunIcon = themeToggle.querySelector('.fa-sun');
+        if (icon) icon.style.display = 'none';
+        if (sunIcon) sunIcon.style.display = 'block';
     }
 });
